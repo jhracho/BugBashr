@@ -46,6 +46,7 @@ if(isset($_POST['signup-submit-button'])){
             $add_user_query = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
             mysqli_query($con, $add_user_query);
             $_SESSION['username'] = $username;
+            $_SESSION['projects'] = array();
             $_SESSION['success'] = "You are now logged in";
     
             // Creates project table for that user
