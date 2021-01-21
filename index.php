@@ -1,8 +1,4 @@
-<?php 
-  echo "test";
-  $database = getenv("CLEARDB_DATABASE_URL");
-  echo "{$database}";
-?>
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
