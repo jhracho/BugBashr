@@ -25,7 +25,9 @@
 <!-- Jumbotron -->
 <div class="container">
   <div class="jumbotron">
-    <h1>Welcome to BugBashr!</h1>
+    <h1><?php
+    $database = getenv("CLEARDB_DATABASE_URL");
+    echo $databse;?></h1>
     <p>Easily track all of your bugs across all of your projects</p>
     <p><a class="btn btn-primary btn-lg" href="home.php" role="button">Login or Sign-Up</a></p>
   </div>
