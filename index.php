@@ -26,7 +26,7 @@
 <div class="container">
   <div class="jumbotron">
     <h1>URL: <?php
-    $database = getenv("CLEARDB_DATABASE_URL");
+    $database = "test";
     echo $databse;?></h1>
     <p>Easily track all of your bugs across all of your projects</p>
     <p><a class="btn btn-primary btn-lg" href="home.php" role="button">Login or Sign-Up</a></p>
