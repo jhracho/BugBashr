@@ -1,9 +1,6 @@
 <?php
 
-us-cdbr-east-03.cleardb.com
-/heroku_2147788ee763750?reconnect=true
-
-$dbhost = "bugbashrds.cbfcz2cbr5g8.us-east-1.rds.amazonaws.com";
+$dbhost = "us-cdbr-east-03.cleardb.com";
 $dbuser = "b0d7a671f1862a";
 $dbpswd = "fca5c476";
 $db     = "heroku_2147788ee763750";
