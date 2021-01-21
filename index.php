@@ -1,4 +1,4 @@
-<?php ?>
+<?php echo "test"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,9 +25,7 @@
 <!-- Jumbotron -->
 <div class="container">
   <div class="jumbotron">
-    <h1>URL: <?php
-    $database = "test";
-    echo $databse;?></h1>
+    <h1>Welcome to BugBashr!</h1>
     <p>Easily track all of your bugs across all of your projects</p>
     <p><a class="btn btn-primary btn-lg" href="home.php" role="button">Login or Sign-Up</a></p>
   </div>
