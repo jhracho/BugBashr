@@ -1,4 +1,8 @@
-<?php echo "test"; ?>
+<?php 
+  echo "test";
+  $database = getenv("CLEARDB_DATABASE_URL");
+  echo "{$database}";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +31,7 @@
   <div class="jumbotron">
     <h1>Welcome to BugBashr!</h1>
     <p>Easily track all of your bugs across all of your projects</p>
-    <p><a class="btn btn-primary btn-lg" href="home.php" role="button">Login or Sign-Up</a></p>
+    <p><a class="btn btn-primary btn-lg" href="login.php" role="button">Login or Sign-Up</a></p>
   </div>
 </div>
 
