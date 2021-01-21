@@ -1,0 +1,12 @@
+.jumbotron{
+    margin: 20 auto;
+}
+
+.table th{
+    text-align: center;
+}
+
+.modal{
+    max-width: 100%;
+}
+
