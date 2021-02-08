@@ -132,7 +132,7 @@ if (isset($_GET['logout'])){
 <?php
 // DYNAMICALLY ADD MODALS
     foreach($_SESSION['projects'] as $project){
-        $modal_name = "".$project['title']."-modal";
+        $modal_name = "".$project['id']."-modal";
         echo"<div class='modal fade' tabindex='-1' role='dialog' id='".$modal_name."'>
         <div class='modal-dialog' role='document'>
             <div class='modal-content'>

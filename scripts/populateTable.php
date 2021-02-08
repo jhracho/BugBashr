@@ -19,7 +19,7 @@ if(mysqli_num_rows($results)){
             </thead>";
     while($project = mysqli_fetch_array($results)){ 
       array_push($projects, $project);
-      $modal_name = $project['title']."-modal";        
+      $modal_name = $project['id']."-modal";        
       echo "<tbody>
                 <tr>
                     <td style=\"text-align: center\"><a role='button' data-toggle=\"modal\" data-target=\"#".$modal_name."\">".$project['title']."</td>
