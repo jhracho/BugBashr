@@ -1,5 +1,5 @@
-connect.php
 # Elastic Beanstalk Files
+connect.php
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
