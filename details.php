@@ -1,4 +1,4 @@
-<?php include('scripts/connect.php') ?>
+<?php //include('scripts/connect.php') ?>
 <?php include('scripts/bugManagement.php')?>
 
 <!DOCTYPE html>

@@ -1,4 +1,4 @@
-<?php include('scripts/connect.php') ?>
+<?php include('connect.php') ?>
 <?php
 
 session_start();
