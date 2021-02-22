@@ -1,4 +1,4 @@
-<?php include('connect.php') ?>
+<?php include('../connect.php') ?>
 <?php
 
 session_start();
@@ -16,21 +16,21 @@ if(isset($_POST['signup-submit-button'])){
     // Error checking
     if (empty($username)){
         echo"<script>alert(\"Username cannot be left blank!\")</script>";
-        header("Refresh: 0; url='signup.php");
+        header("Refresh: 0; url='../signup");
     }
     elseif (empty($password1) || empty($password2)){
         echo"<script>alert(\"Password cannot be left blank!\")</script>";
-        header("Refresh: 0; url='signup.php");
+        header("Refresh: 0; url='../signup");
     }
     
     elseif(strlen($password1) <= 8 || strlen($password2) <= 8){
         echo"<script>alert(\"Password must be between 8-15 characters!\")</script>";
-        header("Refresh: 0; url='signup.php"); 
+        header("Refresh: 0; url='../signup"); 
     }
 
     elseif ($password1 !== $password2) {
         echo"<script>alert(\"Passwords don't match!\")</script>";
-        header("Refresh: 0; url='signup.php");
+        header("Refresh: 0; url='../signup");
     }
 
     else{
@@ -39,7 +39,7 @@ if(isset($_POST['signup-submit-button'])){
         $result = mysqli_query($con, $search_preexisting_query);
         if(mysqli_num_rows($result)){
             echo"<script>alert(\"An account with that username already exists...\")</script>";
-            header("Refresh: 0; url='signup.php");
+            header("Refresh: 0; url='../signup");
         }
         else{
             $password = md5($password1);
@@ -60,7 +60,7 @@ if(isset($_POST['signup-submit-button'])){
     
             // Redirecting
             if(mysqli_query($con, $create_table_query)){
-                header('location: home.php');
+                header('location: ../home');
             }
             else{
                 echo "Error creating user database... sign-up again: " . mysqli_error($con);
@@ -90,11 +90,11 @@ if(isset($_POST['login-button'])){
         $_SESSION['username'] = $username;
         $_SESSION['projects'] = array();
         $_SESSION['projectTable'] = "";
-        header('location: home.php');
+        header('location: ../home');
     }
     else{
         echo"<script>alert(\"Invalid username and/or password\")</script>";
-        header("Refresh: 0; url='login.php");
+        header("Refresh: 0; url='../login");
     }
 }
 

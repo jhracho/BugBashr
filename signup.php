@@ -1,4 +1,4 @@
-<? php include('server.php') ?>
+<? php include('scripts/userManagement.php') ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
         <div class="loginbox">
             <h1>Sign Up</h1>
 
-            <form action="server.php" method="post" onSubmit="return checkPassword(this)">
+            <form action="scripts/userManagement.php" method="post" onSubmit="return checkPassword(this)">
                 <p>Enter Username:</p>
                 <input type="text" name = "username-input" placeholder="Enter your username here!">
                 <p>Enter Password:</p>

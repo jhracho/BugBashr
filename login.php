@@ -1,4 +1,4 @@
-<? php include('server.php') ?>
+<? php include('scripts/userManagement.php') ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +12,13 @@
         <div class="loginbox">
             <h1>Login</h1>
 
-            <form name="login-form" method="post" action="server.php">
+            <form name="login-form" method="post" action="scripts/userManagement.php">
                 <p>Username:</p>
                 <input type="text" name="username-input" id="username-input" placeholder="Enter Username">
                 <p>Password:</p>
                 <input type="password" name="password-input" id="password-input" placeholder="Enter Password">
                 <button type="submit" name="login-button">Login</button>
-                <a class="button" id="signup-button" href="signup.php">Sign Up</a>
+                <a class="button" id="signup-button" href="signup">Sign Up</a>
             </form>
 
         </div>
