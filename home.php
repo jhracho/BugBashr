@@ -3,14 +3,14 @@
 <?php
 
 $username = $_SESSION['username'];
+echo($username);
 
-/*
 // PREVENT NON-LOGGED IN USERS FROM ACCESSING HOME PAGE
-if (!isset($_SESSION['username'])){
+if (empty($username)){
   $_SESSION['msg'] = "You must log in to view this page!";
   header("location: login.php");
 }
-*/
+
 
 // LOG-OUT USER
 if (isset($_GET['logout'])){
