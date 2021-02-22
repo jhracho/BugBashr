@@ -3,12 +3,11 @@
 <?php
 
 $username = $_SESSION['username'];
-echo($username);
 
 // PREVENT NON-LOGGED IN USERS FROM ACCESSING HOME PAGE
 if (empty($username)){
   $_SESSION['msg'] = "You must log in to view this page!";
-  header("location: login.php");
+  header("location: login");
 }
 
 
@@ -16,7 +15,7 @@ if (empty($username)){
 if (isset($_GET['logout'])){
   session_destroy();
   unset($_SESSION['username']);
-  header("location: index.php");
+  header("location: index");
 }
 
 ?>
@@ -53,7 +52,7 @@ if (isset($_GET['logout'])){
         <li><a data-toggle="modal" data-target="#remove-project-modal">Remove Project</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a name="logout-button" method="get" href="index.php?logout='1'">Logout</a></li>
+        <li><a name="logout-button" method="get" href="index?logout='1'">Logout</a></li>
       </ul>
     </div>
   </div>
@@ -148,7 +147,7 @@ if (isset($_GET['logout'])){
                     <p><strong>Tracked Bugs: </strong>".$project['bugs']."</p>
                 </div>
                 <div class='modal-footer'>
-                    <a class='btn btn-primary' href='details.php?ID=".$project['id']."'>View/Manage Bugs</a>
+                    <a class='btn btn-primary' href='details?ID=".$project['id']."'>View/Manage Bugs</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
