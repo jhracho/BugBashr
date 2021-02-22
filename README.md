@@ -11,6 +11,7 @@ Bug Tracker tool designed to track debugging process across multiple projects. B
 ### Tools Used
 - VSCode
 - XAMPP
+- MySQL Workbench
 - phpMyAdmin
 - AWS RDS
 - AWS Elastic Beanstalk / Heroku
