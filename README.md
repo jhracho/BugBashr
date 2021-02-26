@@ -15,3 +15,12 @@ Bug Tracker tool designed to track debugging process across multiple projects. B
 - phpMyAdmin
 - AWS RDS
 - AWS Elastic Beanstalk / Heroku
+
+### TODO
+- Update security
+  - $query = mysqli_prepare($con, "insert into users (username, password) values (?)");
+  - mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+  - mysqli_stmt_execute($query); 
+  - mysqli_stmt_close($query);
+- Update table fetching
+  - while(mysqli_stmt_fetch($query)) 
