@@ -4,12 +4,13 @@
 
 $username = $_SESSION['username'];
 
+/*
 // PREVENT NON-LOGGED IN USERS FROM ACCESSING HOME PAGE
 if (empty($username)){
   $_SESSION['msg'] = "You must log in to view this page!";
   header("location: login");
 }
-
+*/
 
 // LOG-OUT USER
 if (isset($_GET['logout'])){

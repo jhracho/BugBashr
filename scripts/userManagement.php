@@ -63,7 +63,7 @@ if(isset($_POST['signup-submit-button'])){
                 header('location: ../home');
             }
             else{
-                echo "Error creating user database... sign-up again: " . mysqli_error($con);
+                echo "Error creating user database... sign-up again: ".mysqli_error($con);
                 $undo_signup_query = "DELETE FROM users WHERE username='$username'";
                 if (!mysqli_query($con, $undo_signup_query)){
                     echo "FATAL ERROR!! Restart the webpage and contact the webmaster!!";
@@ -75,16 +75,32 @@ if(isset($_POST['signup-submit-button'])){
 
 // LOG-IN USER
 if(isset($_POST['login-button'])){
+    
+    // Generate Query
+    $validate_query = mysqli_prepare($con, "SELECT count(*) as valid FROM users WHERE username = ? AND password = md5(?)");
+    mysqli_stmt_bind_param($validate_query, "ss", $_POST['username-input'], $_POST['password-input']);
 
+    /*
     // Get values from HTML form
     $username  = mysqli_real_escape_string($con, $_POST['username-input']);
     $password1 = mysqli_real_escape_string($con, $_POST['password-input']);
     $password = md5($password1);
-    
-    // Generate Query
-    $validate_query = "SELECT * FROM users WHERE username ='$username' AND password = '$password'";
-    $results = mysqli_query($con, $validate_query);
+    */
+    // password(?)
 
+    // Authenticate User
+    mysqli_stmt_execute($validate_query);
+    mysqli_stmt_bind_result($validate_query, $valid);
+    mysqli_stmt_fetch($validate_query);
+
+    if ($valid > 0){
+        $_SESSION['username'] = $username;
+        $_SESSION['projects'] = array();
+        $_SESSION['projectTable'] = "";
+        header('location: ../home');
+    }
+
+    /*
     // Check for validation
     if(mysqli_num_rows($results)){
         $_SESSION['username'] = $username;
@@ -92,6 +108,8 @@ if(isset($_POST['login-button'])){
         $_SESSION['projectTable'] = "";
         header('location: ../home');
     }
+    */
+    
     else{
         echo"<script>alert(\"Invalid username and/or password\")</script>";
         header("Refresh: 0; url='../login");
