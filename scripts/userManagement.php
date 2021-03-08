@@ -43,23 +43,34 @@ if(isset($_POST['signup-submit-button'])){
             header("Refresh: 0; url='../signup");
         }
         else{
+            /*
             $password = md5($password1);
             $add_user_query = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
             mysqli_query($con, $add_user_query);
             $_SESSION['username'] = $username;
             $_SESSION['projects'] = array();
             $_SESSION['success'] = "You are now logged in";
-    
+            */
+
+            // Prepare and send add_user_query
+            $add_user_query = mysqli_prepare($con, "INSERT INTO users (username, password) VALUES (?,md5(?))");
+            mysqli_stmt_bind_param($add_user_query, "ss", $username, $password);
+            mysqli_stmt_execute($add_user_query);
+
             // Creates project table for that user
-            $create_table_query = "CREATE TABLE ".$username." (
+            $create_table_query = mysqli_prepare($con, "CREATE TABLE ? (
                 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
                 title VARCHAR(255), 
                 bugs INT(255), 
                 orig VARCHAR(255), 
                 deadline VARCHAR(255),
-                description TEXT(1000))";
-    
+                description TEXT(1000))");
+            mysqli_stmt_bind_param($create_table_query, "s", $username);
+            mysqli_stmt_execute($create_table_query);
+            header('location: ../home');
             // Redirecting
+
+            /*
             if(mysqli_query($con, $create_table_query)){
                 header('location: ../home');
             }
@@ -70,6 +81,7 @@ if(isset($_POST['signup-submit-button'])){
                     echo "FATAL ERROR!! Restart the webpage and contact the webmaster!!";
                 }
             } 
+            */
         } 
     } 
 }
@@ -81,36 +93,19 @@ if(isset($_POST['login-button'])){
     $validate_query = mysqli_prepare($con, "SELECT count(*) as valid FROM users WHERE username = ? AND password = md5(?)");
     mysqli_stmt_bind_param($validate_query, "ss", $_POST['username-input'], $_POST['password-input']);
 
-    /*
-    // Get values from HTML form
-    $username  = mysqli_real_escape_string($con, $_POST['username-input']);
-    $password1 = mysqli_real_escape_string($con, $_POST['password-input']);
-    $password = md5($password1);
-    */
-    // password(?)
-
-    // Authenticate User
+    // Run Query
     mysqli_stmt_execute($validate_query);
     mysqli_stmt_bind_result($validate_query, $valid);
     mysqli_stmt_fetch($validate_query);
 
+    // Authenticate
     if ($valid > 0){
         $_SESSION['username'] = $_POST['username-input'];
         $_SESSION['projects'] = array();
         $_SESSION['projectTable'] = "";
         header('location: ../home');
     }
-
-    /*
-    // Check for validation
-    if(mysqli_num_rows($results)){
-        $_SESSION['username'] = $username;
-        $_SESSION['projects'] = array();
-        $_SESSION['projectTable'] = "";
-        header('location: ../home');
-    }
-    */
-    
+   
     else{
         echo"<script>alert(\"Invalid username and/or password\")</script>";
         header("Refresh: 0; url='../login");
