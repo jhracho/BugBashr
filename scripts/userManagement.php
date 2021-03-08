@@ -1,6 +1,7 @@
 <?php include('../connect.php') ?>
 <?php
 
+// PORT 3306
 session_start();
 $username = "";
 $password = "";
@@ -94,7 +95,7 @@ if(isset($_POST['login-button'])){
     mysqli_stmt_fetch($validate_query);
 
     if ($valid > 0){
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $_POST['username-input'];
         $_SESSION['projects'] = array();
         $_SESSION['projectTable'] = "";
         header('location: ../home');
