@@ -72,7 +72,6 @@ if(isset($_POST['login-button'])){
     if ($valid > 0){
         $_SESSION['username'] = $_POST['username-input'];
         $_SESSION['projects'] = array();
-        $_SESSION['projectTable'] = "";
         header('location: ../home');
     }
    

@@ -11,16 +11,6 @@ if (empty($username)){
   header("location: login");
 }
 
-
-// LOG-OUT USER
-if (isset($_GET['logout'])){
-  session_destroy();
-  unset($_SESSION['username']);
-  header("location: index");
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +43,7 @@ if (isset($_GET['logout'])){
         <li><a data-toggle="modal" data-target="#remove-project-modal">Remove Project</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a name="logout-button" method="get" href="index?logout='1'">Logout</a></li>
+        <li><a name="logout-button" method="get" href="logout">Logout</a></li>
       </ul>
     </div>
   </div>
@@ -124,7 +114,6 @@ if (isset($_GET['logout'])){
             <button type="submit" class="btn btn-primary" name="project-delete-button">Delete</button>
           </form>
          </div>
-         
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
