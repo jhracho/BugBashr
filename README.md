@@ -24,3 +24,5 @@ Bug Tracker tool designed to track debugging process across multiple projects. B
   - mysqli_stmt_close($query);
 - Update table fetching
   - while(mysqli_stmt_fetch($query)) 
+- In delete files, check to see that the usernames match before deleting
+  - This prevents people from deleting other people's stuff
