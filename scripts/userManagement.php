@@ -24,8 +24,8 @@ if(isset($_POST['signup-submit-button'])){
         header("Refresh: 0; url='../signup");
     }
     
-    elseif(strlen($password1) <= 8 || strlen($password2) <= 8){
-        echo"<script>alert(\"Password must be between 8-15 characters!\")</script>";
+    elseif(strlen($password1) <= 4 || strlen($password2) >= 15){
+        echo"<script>alert(\"Password must be between 4-15 characters!\")</script>";
         header("Refresh: 0; url='../signup"); 
     }
 
@@ -52,6 +52,8 @@ if(isset($_POST['signup-submit-button'])){
             mysqli_stmt_bind_param($add_user_query, "ss", $username, $password);
             mysqli_stmt_execute($add_user_query);
             $_SESSION['username'] = $username;
+            $_SESSION['user_id'] = mysqli_insert_id($con);
+            mysqli_stmt_close($add_user_query);
             header('location: ../home');
         } 
     } 
@@ -68,7 +70,7 @@ if(isset($_POST['login-button'])){
     mysqli_stmt_execute($validate_query);
     mysqli_stmt_bind_result($validate_query, $user_id);
     mysqli_stmt_fetch($validate_query);
-
+    mysqli_stmt_close($validate_query);
     // Authenticate
     if ($user_id > 0){
         $_SESSION['username'] = $_POST['username-input'];

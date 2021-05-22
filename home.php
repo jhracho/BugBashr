@@ -113,32 +113,7 @@ if (empty($username)){
    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<?php
-// DYNAMICALLY ADD MODALS
-    foreach($_SESSION['projects'] as $project){
-        $modal_name = "".$project['id']."-modal";
-        echo"<div class='modal fade' tabindex='-1' role='dialog' id='".$modal_name."'>
-        <div class='modal-dialog' role='document'>
-            <div class='modal-content'>
-                <div class='modal-header'>
-                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>×</span></button>
-                    <h4 class='modal-title'>".$project['title']."</h4>
-                </div>
-                <div class='modal-body'>
-                    <p><strong>Description:</strong></p>
-                    <p>".$project['description']."</p>
-                    <p><strong>Date Added:</strong></p>
-                    <p>".$project['orig']."</p>
-                    <p><strong>Tracked Bugs: </strong>".$project['bugs']."</p>
-                </div>
-                <div class='modal-footer'>
-                    <a class='btn btn-primary' href='details?ID=".$project['id']."'>View/Manage Bugs</a>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->";
-    }
-?>
+<?php include('scripts/populateHome.php') ?>
 
 <!-- Footer area <script src="scripts/home.js"></script> -->
   <footer class="footer">
