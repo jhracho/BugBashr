@@ -22,13 +22,31 @@ if (isset($_POST['project-submit-button'])){
         echo"<script>alert(\"A project with that name already exists. Please rename your project.\")</script>";
     }
     else{
-         
-        }
+        $add_project = mysqli_prepare($con, "INSERT INTO projects VALUES (NULL, ?, ?, ?, CURDATE(), ?, 0");
+        mysqli_stmt_bind_param($add_project, "isss", $user_id, $projectTitle, $projDescription, $projDeadline);
+        mysqli_stmt_execute($add_project);
+        mysqli_stmt_close($add_project);        
     }
 }
 
 // REMOVING PROJECTS
 if (isset($_POST['project-delete-button'])){
-    
+    $project_name = mysqli_real_escape_string($con, $_POST['project-select']);
+    $retrieve_id = mysqli_prepare($con, "SELECT project_id FROM projects WHERE project_name = ?");
+    mysqli_stmt_bind_param($retrieve_id, "s", $project_name);
+    mysqli_stmt_execute($retrieve_id);
+    mysqli_stmt_bind_result($retrieve_id, $project_id);
+    mysqli_stmt_fetch($retrieve_id);
+    mysqli_stmt_close($retrieve_id);
+
+    $delete_project = mysqli_prepare($con, "DELETE FROM projects WHERE project_name = ?");
+    mysqli_stmt_bind_param($delete_project, "s", $project_name);
+    mysqli_stmt_execute($delete_project);
+    mysqli_stmt_close($delete_project);
+
+    $delete_bugs = mysqli_prepare($con, "DELETE FROM bugs WHERE project_id = ?");
+    mysqli_stmt_bind_param($delete_bugs, "i", $project_id);
+    mysqli_stmt_execute($delete_bugs);
+    mysqli_stmt_close($delete_bugs);
 }
 ?>
