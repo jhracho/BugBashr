@@ -3,55 +3,32 @@
 
 session_start();
 $username = $_SESSION['username'];
+$user_id  = $_SESSION['user_id'];
 
 // ADDING PROJECTS
 if (isset($_POST['project-submit-button'])){
     $projectTitle    = mysqli_real_escape_string($con, $_POST['title-input']);
     $projDescription = mysqli_real_escape_string($con, $_POST['description-input']);
     $projDeadline    = mysqli_real_escape_string($con, $_POST['deadline-input']);
-    $startDate       = date("m/d/Y");
 
-    // PREVENT SQL INJECTION
-    if (strcmp($projectTitle, "*") == 0){
-        echo"<script>alert(\"Invalid project name... no SQL injections allowed ;)\")</script>";
-        header("Refresh: 0; url='header.php");
+    // Check if a project name already exists
+    $search_preexisting = mysqli_prepare($con, "SELECT count(project_name) FROM projects where project_name = ? AND user_id = ?");
+    mysqli_stmt_bind_param($search_preexisting, "si", $projectTitle, $user_id);
+    mysqli_stmt_execute($search_preexisting);
+    mysqli_stmt_bind_result($search_preexisting, $pCount);
+    mysqli_stmt_fetch($search_preexisting);
+    mysqli_stmt_close($search_preexisting);
+    if ($pCount > 0){
+        echo"<script>alert(\"A project with that name already exists. Please rename your project.\")</script>";
     }
     else{
-        $search_preexisting_query = "SELECT * FROM ".$username." WHERE title='$projectTitle' LIMIT 1";
-        $results = mysqli_query($con, $search_preexisting_query);
-        if (mysqli_num_rows($results)){
-            echo"<script>alert(\"A project with that name already exists. Please rename your project.\")</script>";
-        }
-        else{
-            $add_project_query = "INSERT INTO ".$username." (title, bugs, orig, deadline, description) VALUES ('$projectTitle', 0, '$startDate', '$projDeadline', '$projDescription')";
-            $projectTable = md5($username.$projectTitle);
-            $create_table_query = "CREATE TABLE ".$projectTable." (
-                bugid INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
-                description TEXT(250),
-                priority INT(5))";
-            if(mysqli_query($con, $add_project_query) && mysqli_query($con, $create_table_query)){
-                //echo"<script>alert(\"Project added!\")</script>";
-                header("Refresh: 0; url='home.php");
-            }
-            else{
-                echo"<script>alert(\"Error adding project, please try again: ".mysqli_error($con)."\")</script>";
-                header("Refresh: 0; url='home.php");
-            }
+         
         }
     }
 }
 
 // REMOVING PROJECTS
 if (isset($_POST['project-delete-button'])){
-    $projectTitle = mysqli_real_escape_string($con, $_POST['project-select']);
-    $delete_project_query = "DELETE FROM ".$username." WHERE title='$projectTitle'";
-    $projectTable = md5($username.$projectTitle);
-    $delete_project_table_query = "DROP TABLE ".$projectTable;
-    if (mysqli_query($con, $delete_project_query) && mysqli_query($con, $delete_project_table_query)){
-        //echo"<script>alert(\"Project deleted!\")</script>";
-    }
-    else{
-        echo"<script>alert(\"Error adding project, please try again: ".mysqli_error($con)."\")</script>";
-    }
+    
 }
 ?>

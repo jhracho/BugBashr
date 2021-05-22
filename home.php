@@ -3,13 +3,12 @@
 <?php
 
 $username = $_SESSION['username'];
-
-
 // PREVENT NON-LOGGED IN USERS FROM ACCESSING HOME PAGE
 if (empty($username)){
   $_SESSION['msg'] = "You must log in to view this page!";
   header("location: login");
 }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,11 +103,7 @@ if (empty($username)){
             <div class="form-group">
               <label for="checkboxes"></label>
               <select class="form-control" name="project-select">
-                <?php
-                  foreach ($_SESSION['projects'] as $project){
-                    echo"<option>".$project['title']."</option>";
-                  }
-                ?>
+                <?php include('scripts/populateRemoveModal.php')?>
               </select>
             </div>
             <button type="submit" class="btn btn-primary" name="project-delete-button">Delete</button>

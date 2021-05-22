@@ -51,6 +51,7 @@ if(isset($_POST['signup-submit-button'])){
             $add_user_query = mysqli_prepare($con, "INSERT INTO users (username, password) VALUES (?,md5(?))");
             mysqli_stmt_bind_param($add_user_query, "ss", $username, $password);
             mysqli_stmt_execute($add_user_query);
+            $_SESSION['username'] = $username;
             header('location: ../home');
         } 
     } 
@@ -60,18 +61,18 @@ if(isset($_POST['signup-submit-button'])){
 if(isset($_POST['login-button'])){
     
     // Generate Query
-    $validate_query = mysqli_prepare($con, "SELECT count(*) as valid FROM users WHERE username = ? AND password = md5(?)");
+    $validate_query = mysqli_prepare($con, "SELECT user_id FROM users WHERE username = ? AND password = md5(?)");
     mysqli_stmt_bind_param($validate_query, "ss", $_POST['username-input'], $_POST['password-input']);
 
     // Run Query
     mysqli_stmt_execute($validate_query);
-    mysqli_stmt_bind_result($validate_query, $valid);
+    mysqli_stmt_bind_result($validate_query, $user_id);
     mysqli_stmt_fetch($validate_query);
 
     // Authenticate
-    if ($valid > 0){
+    if ($user_id > 0){
         $_SESSION['username'] = $_POST['username-input'];
-        $_SESSION['projects'] = array();
+        $_SESSION['user_id'] = $user_id;
         header('location: ../home');
     }
    
