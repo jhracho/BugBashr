@@ -60,14 +60,8 @@
               </div>
               
               <div class="form-group">
-                <label for="checkboxes">Priority:</label>
-                <select class="form-control" name="priority-input">
-                    <option>1 (Least)</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5 (Greatest)</option>
-                </select>
+                <label for="checkboxes" id="priority-text">Priority: 3 (Medium)</label>
+                <input type="range" id="slider" name='priority-input' min='1' max='5' step='1' onchange='updateValue(this.value);'>
               </div>
 
               <button type="reset" class="btn btn-default" id="bsr-clear-button">Clear</button>
@@ -90,6 +84,7 @@
 <!-- Javascript includes -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="scripts/characterCount.js"></script>    
+<script src="scripts/characterCount.js"></script> 
+<script src="scripts/slider.js"></script>   
 </body>
 </html>
