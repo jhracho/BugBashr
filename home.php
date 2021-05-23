@@ -78,8 +78,8 @@ if (empty($username)){
               </div>
               <div style='text-align:right' id='charactersRemaining'>Characters Remaining: 200</div>
               <div class="form-group">
-                <label for="tex-input">Deadline (Enter in format MM/DD/YYYY):</label>
-                <input name="deadline-input" type="text" class="form-control" id="input-text-6850203">
+                <label for="tex-input">Deadline:</label>
+                <input name="deadline-input" type="date" class="form-control" id="input-text-6850203">
               </div>
               <button type="reset" class="btn btn-default" id="bsr-clear-button">Clear</button>
               <button type="submit" class="btn btn-primary" name="project-submit-button">Submit</button>

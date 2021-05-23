@@ -29,6 +29,7 @@
             class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand">BugBashr</a></div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+            <li><a data-toggle="modal" data-target="#add-bug-modal">Add Bug</a></li>
             <li><a href="home.php">Return Home<span class="sr-only">(current)</span></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

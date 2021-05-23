@@ -1,31 +1,36 @@
+<?php include('connect.php') ?>
 <?php
-//session_start();
-//proceed
+
+$get_project = mysqli_prepare($con, "SELECT project_name FROM projects WHERE project_id = ?");
+mysqli_stmt_bind_param($get_project, "i", $project_id);
+mysqli_stmt_execute($get_project);
+mysqli_stmt_bind_result($get_project, $project_name);
+mysqli_stmt_fetch($get_project);
+mysqli_stmt_close($get_project);
+echo"<!-- Jumbotron -->
+<div class='container' id='table-container'>
+    <div class='jumbotron text-center' id='table-host'>
+        <h2 align='left'>Tracked bugs for ".$project_name.": 
+            <button class='btn btn-primary' name='project-submit-button' data-toggle='modal' data-target='#add-bug-modal'>Add Bug</button>
+        </h2>  ";
+
 $username = $_SESSION['username'];
+$user_id = $_SESSION['user_id'];
     if(isset($_GET['ID'])){
-        $projectID = mysqli_real_escape_string($con, $_GET['ID']);
-        $get_project_data_query = "SELECT * FROM ".$username." WHERE id= '$projectID'";
-        $result = mysqli_query($con, $get_project_data_query);
-        $project = mysqli_fetch_array($result);
-        if (!isset($project)){
-            echo "<h1>No such project exists...</h1>";
+        $project_id = mysqli_real_escape_string($con, $_GET['ID']);
+
+        $get_bugs = mysqli_prepare($con, "SELECT bug_id, priority, bug_desc FROM bugs WHERE project_id = ?");
+        mysqli_stmt_bind_param($get_bugs, "i", $project_id);
+        mysqli_stmt_execute($get_bugs);
+        mysqli_stmt_bind_result($get_bugs, $bug_id, $bug_priority, $bug_desc);
+        mysqli_stmt_store_result($get_bugs);
+        $bCount = mysqli_stmt_num_rows($get_bugs);
+       
+        if ($bCount == 0){
+            echo "<h3>There are no bugs tracked for this project...</h3>";
         }
         else{
-            $projectTitle = $project['title'];
-            $projectTable = md5($username.$projectTitle);
-            $_SESSION['projectTable'] = $projectTable;
-            $_SESSION['project'] = $_GET['ID'];
-            $get_bugs_query = "SELECT * FROM ".$projectTable;
-            $results = mysqli_query($con, $get_bugs_query);
-            echo"
-                <!-- Jumbotron -->
-                <div class='container' id='table-container'>
-                    <div class='jumbotron text-center' id='table-host'>
-                        <h2 align='left'>Tracked bugs for ".$projectTitle.": 
-                            <button class='btn btn-primary' name='project-submit-button' data-toggle='modal' data-target='#add-bug-modal'>Add Bug</button>
-                        </h2>";
-            if (mysqli_num_rows($results)){  
-                echo"        
+            echo"   
                         <table class='table table-striped'>
                         <thead>
                             <tr>
@@ -35,22 +40,19 @@ $username = $_SESSION['username'];
                                 <th style=\"text-align: left\"></th>
                             </tr>
                         </thead>";
-                while($bug = mysqli_fetch_array($results)){        
+                while(mysqli_stmt_fetch($get_bugs)){        
                 echo "<tbody>
                             <tr>
-                                <td style=\"text-align: center\">".$bug['bugid']."</td>
-                                <td style=\"text-align: center\">".$bug['priority']."</td>
-                                <td style=\"text-align: left\">".$bug['description']."</td>
-                                <td><a class='btn btn-danger' href='delete.php?ID={$bug['bugid']}'><i class='fa fa-remove' aria-hidden='true'></i></a></td>
+                                <td style=\"text-align: center\">".$bug_id."</td>
+                                <td style=\"text-align: center\">".$bug_priority."</td>
+                                <td style=\"text-align: left\">".$bug_desc."</td>
+                                <td><a class='btn btn-danger' href='delete.php?ID={$bug_id}'><i class='fa fa-remove' aria-hidden='true'></i></a></td>
                             </tr>
                     </tbody>";
                 }
                 echo "</table>";
-            }
-            else{
-                echo"<br>";
-                echo "<h4>There are no bugs being tracked for this project...</h4>";
-            }
         }
+        mysqli_stmt_close($get_bugs);
     }
+
 ?>
