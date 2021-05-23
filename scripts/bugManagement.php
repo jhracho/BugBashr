@@ -5,7 +5,10 @@
 session_start();
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
-$project_id = $_GET['ID'];
+
+if (isset($_GET['ID'])){
+    $project_id = $_GET['ID'];
+}
 
 // PHP FOR ADDING BUG
 if (isset($_POST['bug-submit-button'])){
