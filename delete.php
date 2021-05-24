@@ -19,7 +19,7 @@ if (isset($_GET['ID'])){
     // Check if the user has access to the project
     $found = strpos($has_access, $bug_id);
 
-    // Interpret the query result
+    // Interpret the result
     if ($found !== false){
         $delete_bug = mysqli_prepare($con, 'DELETE FROM bugs WHERE bug_id = ?');
         mysqli_stmt_bind_param($delete_bug, "i", $bug_id);
