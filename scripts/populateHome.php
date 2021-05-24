@@ -24,6 +24,7 @@
                 </div>
                 <div class='modal-footer'>
                     <a class='btn btn-primary' href='details?ID=".$project_id."'>View/Manage Bugs</a>
+                    <a class='btn btn-primary' href='team?ID=".$project_id."'>Manage Team</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
