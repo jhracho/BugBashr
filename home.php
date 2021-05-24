@@ -42,6 +42,7 @@ if (empty($username)){
         <li><a data-toggle="modal" data-target="#remove-project-modal">Remove Project</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a name="mail-button" method="get" href="inbox"><i class='fa fa-envelope' aria-hidden='true'></i></a></li>
         <li><a name="logout-button" method="get" href="logout">Logout</a></li>
       </ul>
     </div>

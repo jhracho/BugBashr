@@ -32,6 +32,7 @@
             <li><a href="home.php">Return Home<span class="sr-only">(current)</span></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li><a name="mail-button" method="get" href="inbox"><i class='fa fa-envelope' aria-hidden='true'></i></a></li>
             <li><a name="logout-button" method="get" href="index.php?logout='1'">Logout</a></li>
         </ul>
         </div>
