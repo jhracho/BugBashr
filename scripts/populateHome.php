@@ -1,6 +1,6 @@
 <?php include('connect.php') ?>
 <?php
-// DYNAMICALLY ADD MODALS
+// DYNAMICALLY ADD PROJECT MODALS
     $user_id = $_SESSION['user_id'];
     $get_projects = mysqli_prepare($con, "SELECT project_id, project_name, project_desc, creation_date, total_bugs FROM projects WHERE user_id = ?");
     mysqli_stmt_bind_param($get_projects, "i", $user_id);

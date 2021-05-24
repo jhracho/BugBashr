@@ -29,7 +29,7 @@ if (isset($_POST['project-submit-button'])){
     }
 }
 
-// REMOVING PROJECTS
+// REMOVING PROJECT
 if (isset($_POST['project-delete-button'])){
     $project_name = mysqli_real_escape_string($con, $_POST['project-select']);
     $retrieve_id = mysqli_prepare($con, "SELECT project_id FROM projects WHERE project_name = ?");
