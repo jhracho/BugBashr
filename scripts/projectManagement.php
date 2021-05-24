@@ -22,8 +22,8 @@ if (isset($_POST['project-submit-button'])){
         echo"<script>alert(\"A project with that name already exists. Please rename your project.\")</script>";
     }
     else{
-        $add_project = mysqli_prepare($con, "INSERT INTO projects VALUES (NULL, ?, ?, ?, CURDATE(), ?, 0)");
-        mysqli_stmt_bind_param($add_project, "isss", $user_id, $projectTitle, $projDescription, $projDeadline);
+        $add_project = mysqli_prepare($con, "INSERT INTO projects VALUES (NULL, ?, ?, ?, CURDATE(), ?, 0, ?)");
+        mysqli_stmt_bind_param($add_project, "issss", $user_id, $projectTitle, $projDescription, $projDeadline, $user_id);
         mysqli_stmt_execute($add_project);
         mysqli_stmt_close($add_project);        
     }
