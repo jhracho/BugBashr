@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<!-- Add bug modal -->
+<!-- Add bug modal-->
 <div class="modal fade" tabindex="-1" role="dialog" id="add-bug-modal">
    <div class="modal-dialog" role="document">
       <div class="modal-content">
