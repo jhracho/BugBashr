@@ -27,11 +27,12 @@ if (isset($_GET['ID'])){
         mysqli_stmt_close($delete_bug);
     }
     else{
-        echo "Cannot access this page";
+        header('location: home');
     }
 }
+
 else{
-    echo "Cannot access this page";
+    header('location: home');
 }
 
 ?>

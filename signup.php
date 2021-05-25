@@ -20,6 +20,8 @@
                 <p>Confirm Password:</p>
                 <input type="text" maxlength='15' id='p2' name = "password-input2" placeholder="Must be between 8-15 characters">
                 <div id='passwordMatch'></div>
+                <p>Company:</p>
+                <input type="text" maxlength='15' name = "company-input" placeholder="Enter your company here">
                 <button class="btn btn-primary" type="submit" name="signup-submit-button">Create Account</button>
             </form>
         </div>
