@@ -10,3 +10,15 @@
     max-width: 100%;
 }
 
+.dot{
+    height: 7px;
+    width: 7px;
+    background-color: rgb(236, 6, 6);
+    color:rgb(236, 6, 6);
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 9;
+    position: relative;
+    top: 8px;
+    left: -91px;
+}

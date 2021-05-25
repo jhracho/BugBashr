@@ -2,9 +2,9 @@
 
 <?php
 
-$username = $_SESSION['username'];
+$user = $_SESSION['username'];
 // PREVENT NON-LOGGED IN USERS FROM ACCESSING HOME PAGE
-if (empty($username)){
+if (empty($user)){
   $_SESSION['msg'] = "You must log in to view this page!";
   header("location: login");
 }
@@ -42,7 +42,7 @@ if (empty($username)){
         <li><a data-toggle="modal" data-target="#remove-project-modal">Remove Project</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a name="mail-button" method="get" href="inbox"><i class='fa fa-envelope' aria-hidden='true'></i></a></li>
+        <?php include('scripts/notification.php') ?>
         <li><a name="logout-button" method="get" href="logout">Logout</a></li>
       </ul>
     </div>
@@ -52,7 +52,7 @@ if (empty($username)){
 <!-- Jumbotron -->
 <div class="container" id="table-container">
   <div class="jumbotron text-center" id="table-host">
-    <h2 align="left"><?php echo $username; ?>'s Projects:</h2>
+    <h2 align="left"><?php echo $user; ?>'s Projects:</h2>
     
     <!--- PHP To Get User Projects --->
     <?php include('scripts/populateTable.php') ?>
