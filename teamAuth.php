@@ -1,5 +1,6 @@
 <?php include('connect.php') ?>
 <?php
+    session_start();
     if (isset($_GET['ID'])){
         // Get the users assigned to the project
         $project_id = $_GET['ID'];
@@ -13,10 +14,11 @@
 
         // Check if the user has access to the project
         if ($user_id === $has_access){
-            <?php include('team.php') ?>
+            include('team.php');
         }
         else{
-            header('location: home');
+            //header('location: home');
+            echo"<h3>{$has_access}</h3>";
         }
     }
     else{
