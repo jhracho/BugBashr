@@ -13,6 +13,10 @@
             <h1>Sign Up</h1>
 
             <form action="scripts/userManagement.php" method="post">
+                <p>First Name:</p>
+                <input type="text" name = "firstname-input" placeholder="Enter your first name">
+                <p>Last Name:</p>
+                <input type="text" name = "lastname-input" placeholder="Enter your last name">
                 <p>Enter Username:</p>
                 <input type="text" name = "username-input" placeholder="Enter your username here!">
                 <p>Enter Password:</p>
@@ -21,7 +25,7 @@
                 <input type="text" maxlength='15' id='p2' name = "password-input2" placeholder="Must be between 8-15 characters">
                 <div id='passwordMatch'></div>
                 <p>Company:</p>
-                <input type="text" maxlength='15' name = "company-input" placeholder="Enter your company here">
+                <input type="text" name = "company-input" placeholder="Enter your company here">
                 <button class="btn btn-primary" type="submit" name="signup-submit-button">Create Account</button>
             </form>
         </div>

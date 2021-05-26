@@ -14,6 +14,8 @@ if(isset($_POST['signup-submit-button'])){
     $password1 = mysqli_real_escape_string($con, $_POST['password-input1']);
     $password2 = mysqli_real_escape_string($con, $_POST['password-input2']);
     $company   = mysqli_real_escape_string($con, $_POST['company-input']);
+    $first_name = mysqli_real_escape_string($con, $_POST['firstname-input']);
+    $last_name = mysqli_real_escape_string($con, $_POST['lastname-input']);
 
     // Error checking
     if (empty($username)){
@@ -49,8 +51,8 @@ if(isset($_POST['signup-submit-button'])){
         }
         else{
             // Prepare and send add_user_query
-            $add_user_query = mysqli_prepare($con, "INSERT INTO users (username, password, company) VALUES (?, md5(?), ?)");
-            mysqli_stmt_bind_param($add_user_query, "sss", $username, $password, $company);
+            $add_user_query = mysqli_prepare($con, "INSERT INTO users VALUES (NULL, ?, md5(?), ?, 0, ?, ?)");
+            mysqli_stmt_bind_param($add_user_query, "sss", $username, $password, $company, $first_name, $last_name);
             mysqli_stmt_execute($add_user_query);
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = mysqli_insert_id($con);
