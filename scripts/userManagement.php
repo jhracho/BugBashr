@@ -44,6 +44,7 @@ if(isset($_POST['signup-submit-button'])){
         mysqli_stmt_execute($search_preexisting_query);
         mysqli_stmt_bind_result($search_preexisting_query, $valid);
         mysqli_stmt_fetch($search_preexisting_query);
+        mysqli_stmt_close($search_preexisting_query);
 
         if($valid > 0){
             echo"<script>alert(\"An account with that username already exists...\")</script>";
@@ -51,8 +52,8 @@ if(isset($_POST['signup-submit-button'])){
         }
         else{
             // Prepare and send add_user_query
-            $add_user_query = mysqli_prepare($con, "INSERT INTO users VALUES (NULL, ?, md5(?), ?, 0, ?, ?)");
-            mysqli_stmt_bind_param($add_user_query, "sss", $username, $password, $company, $first_name, $last_name);
+            $add_user_query = mysqli_prepare($con, "INSERT INTO users VALUES (NULL, ?, md5(?), 0, ?, ?, ?)");
+            mysqli_stmt_bind_param($add_user_query, "sssss", $username, $password, $company, $first_name, $last_name);
             mysqli_stmt_execute($add_user_query);
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = mysqli_insert_id($con);
